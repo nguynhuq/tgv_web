@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <title>{% block title %}TGV Search Website{% endblock %}</title>  
+  </head>
+  <body class="modern_ui" onload="">
+    <div class="page secondary">
+        <div class="page-header">
+            <div class="page-header-content">
+                <h1>
+                    TGV Information Website
+                </h1> 
+            </div>
+        </div>
+    </div>
+    {%for record in list_destination%}
+    <table class= "sort table">
+        <thead>
+            <tr>
+                <th class="soft cell"> Departure station </th>
+                <th></th>
+                <th class="soft cell"> Destination station </th>
+                <th></th>
+                <th class="col-appel-2nde"> Tarif Appel 2nd class </th>
+                <th></th>
+                <th class="col-loisir-2nde"> Tarif Loisir 2nd class </th>
+                <th></th>
+                <th class="col-loisir-1ere"> Tarif Loisir 1st class </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th> {{libelle_depart|upper}} </th>
+                <th></th>
+                <th> {{record.libelle_destination}} </th>
+                <th></th>
+                <th> {{record.appel_2nde}} € </th>
+                <th></th>
+                <th> {{record.loisir_2nde}} € </th>
+                <th></th>
+                <th> {{record.loisir_1ere}} € </th>
+            </tr>
+        </tbody>
+    </table>
+    {%endfor%}
+  </body>
+</html>

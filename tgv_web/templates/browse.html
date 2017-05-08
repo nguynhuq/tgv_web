@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <title>{% block title %}TGV Search Website{% endblock %}</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src = "http://maps.google.com/maps/api/js"></script>
+    <script type="text/javascript">
+            function initialize() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(46, 2),
+                    zoom: 5,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+                $.getJSON("/gares_list/", function(data) {
+                        $.each( data, function(i, value) {
+                            var myLatlng = new google.maps.LatLng(value.lat, value.lng);
+                            var marker = new google.maps.Marker({
+                                position: myLatlng,
+                                map: map,
+                                title: value.libelle
+                            });
+                        });
+                });
+            }
+    </script>
+  </head> 
+  <body class="modern_ui" onload="initialize()">
+    <div class="page secondary">
+        <div class="page-header">
+            <div class="page-header-content">
+                <h1>
+                    TGV Information Website
+                </h1> 
+            </div>
+        </div>
+    </div>
+    <div class=gird>
+        <div class="row">
+            <div id="mainmenu" class="span10 offset4">
+                <div id="choice" class="box">
+                    <form id="leftchoice" class="span5" method="get" action="http://localhost:8000/find/">
+                        <b> Departure Station </b>
+                        <small> Choose your departure </small>
+                        <select name="depart" required>
+                            {% for gares in Gares %}
+                                {% if gares.voyageurs == "O" %}
+                                <option value="{{gares.code_uic}}">{{ gares.libelle | upper }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <b> Destination Station </b>
+                        <small> Choose your destination </small>
+                        <select name="destination" required>
+                            {% for gares in Gares %}
+                                {% if gares.voyageurs == "O" %}
+                                <option value="{{gares.code_uic}}">{{ gares.libelle | upper }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Search">
+                    </form>
+                    <form id="rightchoice" class="span5" method="get" action="http://localhost:8000/inspire/">
+                        <b> Inspire me </b>
+                        <small> Tell us where you are </small>
+                        <select name="depart_inspire" required>
+                            {% for gares in Gares %}\
+                                {% if gares.voyageurs == "O" %}
+                                <option value="{{gares.code_uic}}">{{ gares.libelle | upper }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Inspire me">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <form id="form1" runat="server">
+            <div id="map_canvas"></div>
+        </form>
+    </div>
+  </body>
+</html>

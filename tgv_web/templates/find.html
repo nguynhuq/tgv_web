@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="/static/style.css" rel="stylesheet" type="text/css"/>
+    <meta charset="utf-8">
+    <title>{% block title %}TGV Search Website{% endblock %}</title> 
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src = "http://maps.google.com/maps/api/js"></script>
+    <script type="text/javascript">
+            function initialize() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(46, 2),
+                    zoom: 5,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+//                 $.getJSON("/gares_list/", function(data) {
+//                 //console.log(data);
+//                         $.each( data, function(i, value) {
+//                             //console.log(value);
+//                             var myLatlng = new google.maps.LatLng(value.lat, value.lng);
+//                             //alert(myLatlng);
+//                             // console.log(myLatlng);
+//                             var marker = new google.maps.Marker({
+//                                 position: myLatlng,
+//                                 map: map,
+//                                 title: "text "+value.lon
+//                             });
+//                         });
+//                 });
+            }
+    </script>
+  </head>
+  <body class="modern_ui" onload="initialize()">
+    <div class="page secondary">
+        <div class="page-header">
+            <div class="page-header-content">
+                <h1>
+                    TGV Information Website
+                </h1> 
+            </div>
+        </div>
+    </div>
+    <div class= grid>
+        <table class= "sort table">
+            <thead>
+                <tr>
+                    <th class="soft cell"> Departure station </th>
+                    <th></th>
+                    <th class="soft cell"> Destination station </th>
+                    <th></th>
+                    <th class="col-appel-2nde"> Tarif Appel 2nd class </th>
+                    <th></th>
+                    <th class="col-loisir-2nde"> Tarif Loisir 2nd class </th>
+                    <th></th>
+                    <th class="col-loisir-1ere"> Tarif Loisir 1st class </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th> {{libelle_depart|upper}} </th>
+                    <th></th>
+                    <th> {{libelle_destination|upper}} </th>
+                    <th></th>
+                    <th> {{appel_2nde}} € </th>
+                    <th></th>
+                    <th> {{loisir_2nde}} € </th>
+                    <th></th>
+                    <th> {{loisir_1ere}} € </th>
+                </tr>
+            </tbody>
+        </table>
+        <form id="form1" runat="server">
+            <div id="map_canvas"></div>
+        </form>
+    </div>
+  </body>
+</html>
