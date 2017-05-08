@@ -1,5 +1,6 @@
 Django website for TGV information browsing.
-Fontionality:
+
+Funtionality:
     - "Search" - select a specific departure and destionation station: show its price
     - "Inspire me" - select a specific departure station: show all possible destinations and theirs price
 
