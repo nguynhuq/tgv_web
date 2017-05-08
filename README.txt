@@ -42,3 +42,4 @@ Url examples:
     http://localhost:8000/browse/
     http://localhost:8000/find/?depart=87746008&destination=87481002
     http://localhost:8000/inspire/?depart_inspire=87747006
+    (tgv_web/rsc/img for more details)
